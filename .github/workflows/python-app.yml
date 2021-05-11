@@ -24,7 +24,7 @@ jobs:
       run: |
         python limit_high.py
         python financial_results_schedule.py
-        pythom earnings_announcement.py
+        python earnings_announcement.py
     - name: Commit files
       run: |
         git config --global user.email "kabubeikon@gmail.com"
