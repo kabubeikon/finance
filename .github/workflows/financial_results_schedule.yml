@@ -32,7 +32,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Python
       run: |
-        python limit_high.py
         python financial_results_schedule.py
     - name: Commit files
       run: |
