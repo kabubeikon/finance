@@ -1,0 +1,4 @@
+jaconv
+azure-functions
+beautifulsoup4
+requests

@@ -12,18 +12,18 @@ def main():
     soup = BeautifulSoup(html_data.content, "html.parser")
     table = soup.findAll("table", {"class": "rankingTable"})[0]
 
-    thead = table.find("thead").findAll("tr")
-    for index, row in enumerate(thead):
-        cell = row.findAll(['th'])
-        print(cell[0].get_text())
-        writer.writerow(["日付",
-                         cell[0].get_text(),
-                         cell[1].get_text(),
-                         cell[2].get_text(),
-                         cell[3].get_text(),
-                         cell[4].get_text(),
-                         cell[4].get_text(),
-                         cell[5].get_text()])
+    # ヘッダー
+    # thead = table.find("thead").findAll("tr")
+    # for index, row in enumerate(thead):
+    #     cell = row.findAll(['th'])
+    #     writer.writerow(["日付",
+    #                      cell[0].get_text(),
+    #                      cell[1].get_text(),
+    #                      cell[2].get_text(),
+    #                      cell[3].get_text(),
+    #                      cell[4].get_text(),
+    #                      cell[4].get_text(),
+    #                      cell[5].get_text()])
     tbody = table.find("tbody").findAll("tr")
     for index, row in enumerate(tbody):
         cell = row.findAll(['td'])
