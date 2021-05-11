@@ -32,6 +32,7 @@ jobs:
     - name: Run Python
       run: |
         python limit_high.py
+        python financial_results_schedule.py
     - name: Commit files
       run: |
         git config --global user.email "kabubeikon@gmail.com"
