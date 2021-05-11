@@ -7,13 +7,7 @@ on:
   push:
     branches: [ master ]
     schedule:
-      - cron: '0 16 * * *' # JST 1:00
-#    - cron: '0 23 * * *' # JST 8:00
-#    - cron: '0 8 * * *'  # JST 17:00
-#    - cron: '0 9 * * *'  # JST 18:00
-#    - cron: '0 10 * * *' # JST 19:00
-#    - cron: '0 11 * * *' # JST 20:00
-#    - cron: '0 12 * * *' # JST 21:00
+      - cron: '0 12 * * *' # JST 21:00
 
 jobs:
   build:
@@ -32,6 +26,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Python
       run: |
+        python limit_high.py
         python financial_results_schedule.py
     - name: Commit files
       run: |
