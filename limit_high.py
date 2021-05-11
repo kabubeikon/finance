@@ -17,8 +17,7 @@ def main():
     # ヘッダー
     for index, row in enumerate(thead):
         cell = row.findAll(['th'])
-        writer.writerow(["日付",
-                         cell[0].get_text(),
+        writer.writerow([cell[0].get_text(),
                          cell[1].get_text(),
                          cell[2].get_text(),
                          cell[3].get_text(),
@@ -27,8 +26,7 @@ def main():
                          cell[5].get_text()])
     for index, row in enumerate(tbody):
         cell = row.findAll(['td'])
-        writer.writerow([dt.now().strftime('%Y/%m/%d'),
-                         cell[0].get_text(),
+        writer.writerow([cell[0].get_text(),
                          cell[1].get_text(),
                          cell[2].get_text(),
                          cell[3].get_text(),
