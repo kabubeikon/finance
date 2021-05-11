@@ -11,6 +11,7 @@ def main():
     writer = csv.writer(file, lineterminator='\n')
     html_data = requests.get('https://kabutan.jp/warning/?mode=4_2&market=0&capitalization=-1&stc=&stm=0&page=1')
     time.sleep(5)
+    writer.writerow(html_data)
     soup = BeautifulSoup(html_data.content, "html.parser")
     table = soup.findAll("table", {"class": "stock_table"})[0]
     thead = table.find("thead").findAll("tr")
