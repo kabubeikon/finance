@@ -39,4 +39,7 @@ jobs:
         git init
         git add -A
         git commit -m 'Add changes' --allow-empty
-      
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
