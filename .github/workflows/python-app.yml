@@ -2,8 +2,8 @@ name: 決算スケジュール、ストップ高
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   schedule:
     - cron: '0 12 * * *' # JST 21:00
 
