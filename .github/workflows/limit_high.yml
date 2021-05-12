@@ -1,4 +1,4 @@
-name: financial_results_schedule.py
+name: limit_high.py
 
 on:
   workflow_dispatch:
