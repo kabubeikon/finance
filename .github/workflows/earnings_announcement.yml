@@ -1,11 +1,11 @@
-name: 決算スケジュール、ストップ高
+name: earnings_announcement.py
 
 on:
   workflow_dispatch:
 #  push:
 #    branches: [ master ]
   schedule:
-    - cron: '0 12 * * *' # JST 21:00
+    - cron: '0 8 * * *' # JST 17:00
 
 jobs:
   build:
@@ -22,8 +22,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Python
       run: |
-        python limit_high.py
-        python financial_results_schedule.py
         python earnings_announcement.py
     - name: Commit files
       run: |

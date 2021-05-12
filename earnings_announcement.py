@@ -1,36 +1,64 @@
 import csv
-from datetime import datetime as dt
+import time
 
 import requests
 from bs4 import BeautifulSoup
 
-import time
 
 def main():
+    url = "https://kabutan.jp/warning/?mode=4_2&market=0&capitalization=-1&stc=&stm=0&page="
     file = open('./data/earnings_announcement.csv', 'w', encoding="utf-8")
     writer = csv.writer(file, lineterminator='\n')
-    html_data = requests.get('https://kabutan.jp/warning/?mode=4_2&market=0&capitalization=-1&stc=&stm=0&page=1')
+    html_data = requests.get(url + "0")
     time.sleep(5)
-    writer.writerow(html_data)
     soup = BeautifulSoup(html_data.content, "html.parser")
     table = soup.findAll("table", {"class": "stock_table"})[0]
-    thead = table.find("thead").findAll("tr")
-    tbody = table.find("tbody").findAll("tr")
 
+    writer.writerow(["コード",
+                     "銘柄名",
+                     "市場",
+                     "決算ポイント",
+                     "株価",
+                     "前日比",
+                     "前日比(%)",
+                     "ＰＥＲ",
+                     "ＰＢＲ"])
+    tbody = table.find("tbody").findAll("tr")
     for index, row in enumerate(tbody):
         th = row.findAll(['th'])
         td = row.findAll(['td'])
         writer.writerow([td[0].get_text().strip(),
                          th[0].get_text().strip(),
                          td[1].get_text().strip(),
-                         td[2].get_text().strip(),
                          td[3].get_text().strip(),
                          td[4].get_text().strip(),
-                         td[5].get_text().strip(),
                          td[6].get_text().strip(),
                          td[7].get_text().strip(),
-                         td[8].get_text().strip()])
+                         td[8].get_text().strip(),
+                         td[9].get_text().strip()])
     file.close()
+
+    for i in range(10):
+        file = open('./data/earnings_announcement.csv', 'a', encoding="utf-8")
+        writer = csv.writer(file, lineterminator='\n')
+        html_data = requests.get(url + str(i))
+        time.sleep(5)
+        soup = BeautifulSoup(html_data.content, "html.parser")
+        table = soup.findAll("table", {"class": "stock_table"})[0]
+        tbody = table.find("tbody").findAll("tr")
+        for index, row in enumerate(tbody):
+            th = row.findAll(['th'])
+            td = row.findAll(['td'])
+            writer.writerow([td[0].get_text().strip(),
+                             th[0].get_text().strip(),
+                             td[1].get_text().strip(),
+                             td[3].get_text().strip(),
+                             td[4].get_text().strip(),
+                             td[6].get_text().strip(),
+                             td[7].get_text().strip(),
+                             td[8].get_text().strip(),
+                             td[9].get_text().strip()])
+        file.close()
 
 
 if __name__ == '__main__':
