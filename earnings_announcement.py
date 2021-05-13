@@ -1,5 +1,5 @@
 import csv
-import time
+from datetime import datetime as dt
 
 import requests
 from bs4 import BeautifulSoup
@@ -11,7 +11,6 @@ def main():
         file = open('./data/earnings_announcement.csv', 'a', encoding="utf-8")
         writer = csv.writer(file, lineterminator='\n')
         html_data = requests.get(url + str(i))
-        time.sleep(5)
         soup = BeautifulSoup(html_data.content, "html.parser")
         table = soup.findAll("table", {"class": "stock_table"})[0]
         tbody = table.find("tbody").findAll("tr")
@@ -26,7 +25,8 @@ def main():
                              td[6].get_text().strip(),
                              td[7].get_text().strip(),
                              td[8].get_text().strip(),
-                             td[9].get_text().strip()])
+                             td[9].get_text().strip(),
+                             dt.now().strftime('%Y/%m/%d')])
         file.close()
 
 
