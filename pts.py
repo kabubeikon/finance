@@ -4,8 +4,13 @@ from datetime import datetime as dt
 import requests
 from bs4 import BeautifulSoup
 
+import holiday
+
 
 def main():
+    if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
+        return
+
     url = "https://portal.morningstarjp.com/StockInfo/pts/ranking?kind=0&page="
     for i in range(3):
         html_data = requests.get(url + str(i))

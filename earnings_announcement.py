@@ -4,8 +4,13 @@ from datetime import datetime as dt
 import requests
 from bs4 import BeautifulSoup
 
+import holiday
+
 
 def main():
+    if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
+        return
+
     url = "https://kabutan.jp/warning/?mode=4_2&market=0&capitalization=-1&stc=&stm=0&page="
     for i in range(1, 20):
         file = open('./data/earnings_announcement.csv', 'a', encoding="utf-8")

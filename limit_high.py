@@ -4,8 +4,13 @@ from datetime import datetime as dt
 import requests
 from bs4 import BeautifulSoup
 
+import holiday
+
 
 def main():
+    if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
+        return
+
     html_data = requests.get('https://info.finance.yahoo.co.jp/ranking/?kd=27&mk=1&tm=d&vl=a')
     soup = BeautifulSoup(html_data.content, "html.parser")
     table = soup.findAll("table", {"class": "rankingTable"})[0]
