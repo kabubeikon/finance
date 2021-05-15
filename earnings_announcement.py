@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 def main():
     url = "https://kabutan.jp/warning/?mode=4_2&market=0&capitalization=-1&stc=&stm=0&page="
-    for i in range(1, 12):
+    for i in range(12, 20):
         file = open('./data/earnings_announcement.csv', 'a', encoding="utf-8")
         writer = csv.writer(file, lineterminator='\n')
         html_data = requests.get(url + str(i))
