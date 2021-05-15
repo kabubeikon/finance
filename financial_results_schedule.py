@@ -1,15 +1,12 @@
 import csv
-from datetime import datetime as dt
 
 import requests
 from bs4 import BeautifulSoup
 
-import holiday
-
 
 def main():
-    if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
-        return
+    # if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
+    #     return
 
     file = open('./data/financial_results_schedule.csv', 'w', encoding="utf-8")
     writer = csv.writer(file, lineterminator='\n')
