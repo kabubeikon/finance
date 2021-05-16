@@ -12,6 +12,8 @@ def main():
     if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
         return
 
+    # 本日の株価上昇率ランキング
+    url = "https://kabutan.jp/warning/?mode=2_1&market=0&capitalization=-1&stc=&stm=0&page="
     # 日次別ファイル作成
     file1 = open('./rise_rate_ranking/rise_rate_ranking_' + dt.now().strftime('%Y%m%d') + '.csv', 'w', encoding="utf-8")
     writer1 = csv.writer(file1, lineterminator='\n')
@@ -33,7 +35,6 @@ def main():
                       "ＰＥＲ",
                       "ＰＢＲ",
                       "利回り"])
-    url = "https://kabutan.jp/warning/?mode=2_1&market=0&capitalization=-1&stc=&stm=0&page="
     rank = 1
     for i in range(1, 8):
         html_data = requests.get(url + str(i))

@@ -18,43 +18,43 @@ def main():
     tbody = table.find("tbody").findAll("tr")
 
     # 日次別ファイル作成
-    file = open('./limit_high/limit_high_' + dt.now().strftime('%Y%m%d') + '.csv', 'w', encoding="utf-8")
-    writer = csv.writer(file, lineterminator='\n')
+    file1 = open('./limit_high/limit_high_' + dt.now().strftime('%Y%m%d') + '.csv', 'w', encoding="utf-8")
+    writer1 = csv.writer(file1, lineterminator='\n')
+    # 累積ファイル作成
+    file2 = open('./data/limit_high.csv', 'a', encoding="utf-8")
+    writer2 = csv.writer(file2, lineterminator='\n')
+
     # ヘッダー
     for index, row in enumerate(thead):
         cell = row.findAll(['th'])
-        writer.writerow(["コード",
-                         "市場",
-                         "名称",
-                         "取引値",
-                         "前日比(%)",
-                         "前日比",
-                         "高値"])
+        writer1.writerow(["日付",
+                          "コード",
+                          "市場",
+                          "名称",
+                          "取引値",
+                          "前日比(%)",
+                          "前日比",
+                          "高値"])
     for index, row in enumerate(tbody):
         cell = row.findAll(['td'])
-        writer.writerow([cell[0].get_text(),
-                         cell[1].get_text(),
-                         cell[2].get_text(),
-                         cell[4].get_text(),
-                         cell[5].get_text(),
-                         cell[6].get_text(),
-                         cell[7].get_text()])
-    file.close()
-
-    # 累積ファイル作成
-    file = open('./data/limit_high.csv', 'a', encoding="utf-8")
-    writer = csv.writer(file, lineterminator='\n')
-    for index, row in enumerate(tbody):
-        cell = row.findAll(['td'])
-        writer.writerow([dt.now().strftime('%Y/%m/%d'),
-                         cell[0].get_text(),
-                         cell[1].get_text(),
-                         cell[2].get_text(),
-                         cell[4].get_text(),
-                         cell[5].get_text(),
-                         cell[6].get_text(),
-                         cell[7].get_text()])
-    file.close()
+        writer1.writerow([dt.now().strftime('%Y/%m/%d'),
+                          cell[0].get_text(),
+                          cell[1].get_text(),
+                          cell[2].get_text(),
+                          cell[4].get_text(),
+                          cell[5].get_text(),
+                          cell[6].get_text(),
+                          cell[7].get_text()])
+        writer2.writerow([dt.now().strftime('%Y/%m/%d'),
+                          cell[0].get_text(),
+                          cell[1].get_text(),
+                          cell[2].get_text(),
+                          cell[4].get_text(),
+                          cell[5].get_text(),
+                          cell[6].get_text(),
+                          cell[7].get_text()])
+    file1.close()
+    file2.close()
 
 
 if __name__ == '__main__':
