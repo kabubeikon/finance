@@ -9,8 +9,8 @@ import holiday
 
 
 def main():
-    # if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
-    #     return
+    if holiday.isHoliday(dt.now().strftime('%Y%m%d')):
+        return
 
     # 約定回数ランキング
     url = "https://kabutan.jp/warning/?mode=2_9&market=0&capitalization=-1&stc=&stm=0&page="
