@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 #  push:
 #    branches: [ master ]
-  schedule:
-    - cron: '0 8 * * *' # JST 17:00
+#  schedule:
+#    - cron: '0 8 * * *' # JST 17:00
 
 jobs:
   build:
